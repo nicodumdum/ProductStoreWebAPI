@@ -447,5 +447,81 @@
             <param name="id">The unique identifier.</param>
             <exception cref="T:System.Web.Http.HttpResponseException"></exception>
         </member>
+        <member name="F:ProductStore.Models.MySQLDBDriver.connectionString">
+            <summary>
+            The connection string.
+            </summary>
+        </member>
+        <member name="M:ProductStore.Models.MySQLDBDriver.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ProductStore.Models.MySQLDBDriver"/> class.
+            </summary>
+            <param name="dbServer">The database server.</param>
+            <param name="dbUsername">The database username.</param>
+            <param name="dbPassword">The database password.</param>
+            <param name="dbName">Name of the database.</param>
+        </member>
+        <member name="M:ProductStore.Models.MySQLDBDriver.dbConnectionOk">
+            <summary>
+            Checks if the database connection is ok.
+            </summary>
+            <returns>
+            Returns <c>true</c> if the database connection is ok; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:ProductStore.Models.MySQLDBDriver.getAllProducts">
+            <summary>
+            Gets all products.
+            </summary>
+            <returns>
+            Returns an <c>IEnumerable</c> collection of <c>Product</c> objects if at least one product exists; otherwise, returns <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:ProductStore.Models.MySQLDBDriver.getProduct(System.Int32)">
+            <summary>
+            Gets the product.
+            </summary>
+            <param name="id">The unique identifier.</param>
+            <returns>
+            Returns a <c>Product</c> object based on the input <c>id</c> integer if it exists; otherwise, returns <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:ProductStore.Models.MySQLDBDriver.getAllProductsByCategory(System.String)">
+            <summary>
+            Gets all products by category.
+            </summary>
+            <param name="category">The category.</param>
+            <returns>
+            Returns an <c>IEnumerable</c> collection of <c>Product</c> objects based on the input <c>category</c> string if at least one product exists; otherwise, returns <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:ProductStore.Models.MySQLDBDriver.addProduct(ProductStore.Models.Product)">
+            <summary>
+            Adds the product.
+            </summary>
+            <param name="product">The product.</param>
+            <returns>
+            Returns the integer count value of affected rows by the non-query operation.
+            </returns>
+        </member>
+        <member name="M:ProductStore.Models.MySQLDBDriver.updateProduct(ProductStore.Models.Product)">
+            <summary>
+            Updates the product.
+            </summary>
+            <param name="id">The unique identifier.</param>
+            <param name="product">The product.</param>
+            <returns>
+            Returns the integer count value of affected rows by the non-query operation.
+            </returns>
+        </member>
+        <member name="M:ProductStore.Models.MySQLDBDriver.deleteProduct(System.Int32)">
+            <summary>
+            Deletes the product.
+            </summary>
+            <param name="id">The unique identifier.</param>
+            <returns>
+            Returns the integer count value of affected rows by the non-query operation.
+            </returns>
+        </member>
     </members>
 </doc>

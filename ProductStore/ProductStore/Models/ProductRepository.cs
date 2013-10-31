@@ -7,24 +7,38 @@ namespace ProductStore.Models
 {
     public class ProductRepository : IProductRepository
     {
-        private List<Product> products = new List<Product>();
-        private int _nextId = 1;
+        private MySQLDBDriver mySQLDBDriver = new MySQLDBDriver(
+            "48ea4334-f908-439d-9155-a26801228547.mysql.sequelizer.com",
+            "lomrjnnynsbwqkca",
+            "GQLGjgixD8aMome4GwRTxxXCbbBPccZw4PzqfKcuyekvE2RuMguqNtLi2hEhLBuA",
+            "db48ea4334f908439d9155a26801228547");
 
         public ProductRepository()
         {
-            Add(new Product { Name = "Tomato soup", Category = "Groceries", Price = 1.39M });
-            Add(new Product { Name = "Yo-yo", Category = "Toys", Price = 3.75M });
-            Add(new Product { Name = "Hammer", Category = "Hardware", Price = 16.99M });
+            List<Product> products = new List<Product>();
+            products.Add(new Product { Name = "Tomato soup", Category = "Groceries", Price = 1.39M });
+            products.Add(new Product { Name = "Yo-yo", Category = "Toys", Price = 3.75M });
+            products.Add(new Product { Name = "Hammer", Category = "Hardware", Price = 16.99M });
+            //Add(new Product { Name = "Tomato soup", Category = "Groceries", Price = 1.39M });
+            //Add(new Product { Name = "Yo-yo", Category = "Toys", Price = 3.75M });
+            //Add(new Product { Name = "Hammer", Category = "Hardware", Price = 16.99M });
+            foreach (var product in products)
+            {
+                if (mySQLDBDriver.getProduct(product.Id) == null)
+                {
+                    mySQLDBDriver.addProduct(product);
+                }
+            }
         }
 
         public IEnumerable<Product> GetAll()
         {
-            return products;
+            return mySQLDBDriver.getAllProducts();
         }
 
         public Product Get(int id)
         {
-            return products.Find(p => p.Id == id);
+            return mySQLDBDriver.getProduct(id);
         }
 
         public Product Add(Product item)
@@ -33,14 +47,13 @@ namespace ProductStore.Models
             {
                 throw new ArgumentNullException("item");
             }
-            item.Id = _nextId++;
-            products.Add(item);
+            mySQLDBDriver.addProduct(item);
             return item;
         }
 
         public void Remove(int id)
         {
-            products.RemoveAll(p => p.Id == id);
+            mySQLDBDriver.deleteProduct(id);
         }
 
         public bool Update(Product item)
@@ -49,13 +62,11 @@ namespace ProductStore.Models
             {
                 throw new ArgumentNullException("item");
             }
-            int index = products.FindIndex(p => p.Id == item.Id);
-            if (index == -1)
+            if (mySQLDBDriver.getProduct(item.Id) == null)
             {
                 return false;
             }
-            products.RemoveAt(index);
-            products.Add(item);
+            mySQLDBDriver.updateProduct(item);
             return true;
         }
     }
