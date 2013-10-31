@@ -12,11 +12,25 @@ namespace ProductStore.Controllers
     {
         static readonly IProductRepository repository = new ProductRepository();
 
+        /// <summary>
+        /// Gets all products.
+        /// </summary>
+        /// <returns>
+        /// Returns an <c>IEnumerable</c> collection of <c>Product</c> objects.
+        /// </returns>
         public IEnumerable<Product> GetAllProducts()
         {
             return repository.GetAll();
         }
 
+        /// <summary>
+        /// Gets the product.
+        /// </summary>
+        /// <param name="id">The unique identifier.</param>
+        /// <returns>
+        /// Returns a <c>Product</c> object based on the input <c>id</c> integer.
+        /// </returns>
+        /// <exception cref="System.Web.Http.HttpResponseException"></exception>
         public Product GetProduct(int id)
         {
             Product item = repository.Get(id);
@@ -27,12 +41,26 @@ namespace ProductStore.Controllers
             return item;
         }
 
+        /// <summary>
+        /// Gets the products by category.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <returns>
+        /// Returns an <c>IEnumerable</c> collection of <c>Product</c> objects based on the input <c>category</c> string.
+        /// </returns>
         public IEnumerable<Product> GetProductsByCategory(string category)
         {
             return repository.GetAll().Where(
                 p => string.Equals(p.Category, category, StringComparison.OrdinalIgnoreCase));
         }
 
+        /// <summary>
+        /// Posts the product.
+        /// </summary>
+        /// <param name="item">The product item.</param>
+        /// <returns>
+        /// Returns a <c>HttpResponseMessage</c> regarding the result of the method operation.
+        /// </returns>
         public HttpResponseMessage PostProduct(Product item)
         {
             item = repository.Add(item);
@@ -43,6 +71,12 @@ namespace ProductStore.Controllers
             return response;
         }
 
+        /// <summary>
+        /// Puts the product.
+        /// </summary>
+        /// <param name="id">The unique identifier.</param>
+        /// <param name="product">The product.</param>
+        /// <exception cref="System.Web.Http.HttpResponseException"></exception>
         public void PutProduct(int id, Product product)
         {
             product.Id = id;
@@ -52,6 +86,11 @@ namespace ProductStore.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes the product.
+        /// </summary>
+        /// <param name="id">The unique identifier.</param>
+        /// <exception cref="System.Web.Http.HttpResponseException"></exception>
         public void DeleteProduct(int id)
         {
             Product item = repository.Get(id);
