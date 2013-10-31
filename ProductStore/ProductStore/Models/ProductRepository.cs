@@ -16,9 +16,9 @@ namespace ProductStore.Models
         public ProductRepository()
         {
             List<Product> products = new List<Product>();
-            products.Add(new Product { Name = "Tomato soup", Category = "Groceries", Price = 1.39M });
-            products.Add(new Product { Name = "Yo-yo", Category = "Toys", Price = 3.75M });
-            products.Add(new Product { Name = "Hammer", Category = "Hardware", Price = 16.99M });
+            products.Add(new Product { Id = 1, Name = "Tomato soup", Category = "Groceries", Price = 1.39M });
+            products.Add(new Product { Id = 2, Name = "Yo-yo", Category = "Toys", Price = 3.75M });
+            products.Add(new Product { Id = 3, Name = "Hammer", Category = "Hardware", Price = 16.99M });
             //Add(new Product { Name = "Tomato soup", Category = "Groceries", Price = 1.39M });
             //Add(new Product { Name = "Yo-yo", Category = "Toys", Price = 3.75M });
             //Add(new Product { Name = "Hammer", Category = "Hardware", Price = 16.99M });
