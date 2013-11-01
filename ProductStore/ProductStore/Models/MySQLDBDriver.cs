@@ -82,7 +82,9 @@ namespace ProductStore.Models
             {
                 foreach (DataRow row in dataTable.Rows)
                 {
-                    products.Add(new Product {Id = int.Parse(row[0].ToString()), Name = row[1].ToString(), Category = row[2].ToString(), Price = decimal.Parse(row[3].ToString()) });
+                    products.Add(new Product {Id = int.Parse(row[0].ToString()), Name = row[1].ToString(),
+                        Category = row[2].ToString(), Price = decimal.Parse(row[3].ToString()),
+                        Manufacturer = row[4].ToString(), DateReceived = DateTime.Parse(row[5].ToString()) });
                 }
                 return products;
             }
@@ -112,7 +114,9 @@ namespace ProductStore.Models
             if (dataTable.Rows.Count > 0)
             {
                 DataRow row = dataTable.Rows[0];
-                return new Product { Id = int.Parse(row[0].ToString()), Name = row[1].ToString(), Category = row[2].ToString(), Price = decimal.Parse(row[3].ToString()) };
+                return new Product { Id = int.Parse(row[0].ToString()), Name = row[1].ToString(),
+                    Category = row[2].ToString(), Price = decimal.Parse(row[3].ToString()),
+                    Manufacturer = row[4].ToString(), DateReceived = DateTime.Parse(row[5].ToString()) };
             }
             else
             {
@@ -142,7 +146,9 @@ namespace ProductStore.Models
             {
                 foreach (DataRow row in dataTable.Rows)
                 {
-                    products.Add(new Product { Id = int.Parse(row[0].ToString()), Name = row[1].ToString(), Category = row[2].ToString(), Price = decimal.Parse(row[3].ToString()) });
+                    products.Add(new Product { Id = int.Parse(row[0].ToString()), Name = row[1].ToString(),
+                        Category = row[2].ToString(), Price = decimal.Parse(row[3].ToString()),
+                        Manufacturer = row[4].ToString(), DateReceived = DateTime.Parse(row[5].ToString()) });
                 }
                 return products;
             }
@@ -161,11 +167,13 @@ namespace ProductStore.Models
         /// </returns>
         public int addProduct(Product product)
         {
-            string sqlStatement = "INSERT INTO products (id, name, category, price) VALUES (NULL, @name, @category, @price);";
-            MySqlParameter[] parameters = new MySqlParameter[3];
+            string sqlStatement = "INSERT INTO products (id, name, category, price, manufacturer, date_received) VALUES (NULL, @name, @category, @price, @manufacturer, @dateReceived);";
+            MySqlParameter[] parameters = new MySqlParameter[5];
             parameters[0] = new MySqlParameter("name", product.Name);
             parameters[1] = new MySqlParameter("category", product.Category);
             parameters[2] = new MySqlParameter("price", product.Price);
+            parameters[3] = new MySqlParameter("manufacturer", product.Manufacturer);
+            parameters[4] = new MySqlParameter("dateReceived", product.DateReceived);
             return MySqlHelper.ExecuteNonQuery(connectionString, sqlStatement, parameters);
         }
 
@@ -179,12 +187,14 @@ namespace ProductStore.Models
         /// </returns>
         public int updateProduct(Product product)
         {
-            string sqlStatement = "UPDATE products SET name = @name, category = @category, price = @price WHERE id =  @id;";
-            MySqlParameter[] parameters = new MySqlParameter[4];
+            string sqlStatement = "UPDATE products SET name = @name, category = @category, price = @price, manufacturer = @manufacturer, date_received = @dateReceived WHERE id =  @id;";
+            MySqlParameter[] parameters = new MySqlParameter[6];
             parameters[0] = new MySqlParameter("id", product.Id);
             parameters[1] = new MySqlParameter("name", product.Name);
             parameters[2] = new MySqlParameter("category", product.Category);
             parameters[3] = new MySqlParameter("price", product.Price);
+            parameters[4] = new MySqlParameter("manufacturer", product.Manufacturer);
+            parameters[5] = new MySqlParameter("dateReceived", product.DateReceived);
             return MySqlHelper.ExecuteNonQuery(connectionString, sqlStatement, parameters);
         }
 

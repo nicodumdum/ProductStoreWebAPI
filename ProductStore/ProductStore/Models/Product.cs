@@ -12,9 +12,14 @@ namespace ProductStore.Models
         public int Id { get; set; } //==> No need for [Required] annotation since product id is auto-incremented in the database
         [Required]
         public string Name { get; set; }
+        [Required]
         public string Category { get; set; }
         //[Required]
         [NullableRequired]
         public decimal? Price { get; set; }
+        [Required]
+        public string Manufacturer { get; set; }
+        [Required]
+        public DateTime DateReceived { get; set; }
     }
 }
