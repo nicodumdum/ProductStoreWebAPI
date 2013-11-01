@@ -412,7 +412,6 @@
             <returns>
             Returns a <c>Product</c> object based on the input <c>id</c> integer.
             </returns>
-            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
         </member>
         <member name="M:ProductStore.Controllers.ProductsController.GetProductsByCategory(System.String)">
             <summary>

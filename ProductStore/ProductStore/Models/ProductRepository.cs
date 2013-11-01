@@ -24,9 +24,9 @@ namespace ProductStore.Models
             //Add(new Product { Name = "Hammer", Category = "Hardware", Price = 16.99M });
             foreach (var product in products)
             {
-                if (mySQLDBDriver.getProduct(product.Id) == null)
+                if (Get(product.Id) == null)
                 {
-                    mySQLDBDriver.addProduct(product);
+                    Add(product);
                 }
             }
         }
