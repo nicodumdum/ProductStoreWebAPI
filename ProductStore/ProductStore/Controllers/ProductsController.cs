@@ -38,7 +38,18 @@ namespace ProductStore.Controllers
         /// </returns>
         public IEnumerable<Product> GetAllProducts()
         {
-            return repository.GetAll();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            IEnumerable<Product> products = repository.GetAll();
+            stopwatch.Stop();
+            TimeSpan ts = stopwatch.Elapsed;
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+            stopwatch.Reset();
+            Product product = (Product)products.Where(p => p.Id == 9000).Single();
+            product.Manufacturer = elapsedTime;
+            return products;
+            //return repository.GetAll();
         }
 
         /// <summary>
