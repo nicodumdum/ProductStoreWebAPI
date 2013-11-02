@@ -12,6 +12,11 @@ namespace ProductStore.Models
             "lomrjnnynsbwqkca",
             "GQLGjgixD8aMome4GwRTxxXCbbBPccZw4PzqfKcuyekvE2RuMguqNtLi2hEhLBuA",
             "db48ea4334f908439d9155a26801228547");
+        //private MySQLDBDriver mySQLDBDriver = new MySQLDBDriver(
+        //    "localhost",
+        //    "root",
+        //    "root",
+        //    "productstore");
 
         public ProductRepository()
         {

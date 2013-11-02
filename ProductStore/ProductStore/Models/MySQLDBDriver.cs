@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -74,17 +75,27 @@ namespace ProductStore.Models
             string sqlStatement = "SELECT * FROM products ORDER BY id ASC;";
             DataTable dataTable = new DataTable();
             List<Product> products = new List<Product>();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             using (MySqlDataReader reader = MySqlHelper.ExecuteReader(connectionString, sqlStatement))
             {
                 dataTable.Load(reader);
             }
+            stopwatch.Stop();
+            TimeSpan ts = stopwatch.Elapsed;
+            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+            stopwatch.Reset();
             if (dataTable.Rows.Count > 0)
             {
                 foreach (DataRow row in dataTable.Rows)
                 {
+                    //products.Add(new Product {Id = int.Parse(row[0].ToString()), Name = row[1].ToString(),
+                    //    Category = row[2].ToString(), Price = decimal.Parse(row[3].ToString()),
+                    //    Manufacturer = row[4].ToString(), DateReceived = DateTime.Parse(row[5].ToString()) });
                     products.Add(new Product {Id = int.Parse(row[0].ToString()), Name = row[1].ToString(),
                         Category = row[2].ToString(), Price = decimal.Parse(row[3].ToString()),
-                        Manufacturer = row[4].ToString(), DateReceived = DateTime.Parse(row[5].ToString()) });
+                        Manufacturer = elapsedTime, DateReceived = DateTime.Parse(row[5].ToString()) });
                 }
                 return products;
             }

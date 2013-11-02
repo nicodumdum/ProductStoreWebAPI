@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using ProductStore.Models;
 using ProductStore.Filters;
+using System.Diagnostics;
 
 namespace ProductStore.Controllers
 {
