@@ -7,16 +7,16 @@ namespace ProductStore.Models
 {
     public class ProductRepository : IProductRepository
     {
-        private MySQLDBDriver mySQLDBDriver = new MySQLDBDriver(
-            "48ea4334-f908-439d-9155-a26801228547.mysql.sequelizer.com",
-            "lomrjnnynsbwqkca",
-            "GQLGjgixD8aMome4GwRTxxXCbbBPccZw4PzqfKcuyekvE2RuMguqNtLi2hEhLBuA",
-            "db48ea4334f908439d9155a26801228547");
         //private MySQLDBDriver mySQLDBDriver = new MySQLDBDriver(
-        //    "localhost",
-        //    "root",
-        //    "root",
-        //    "productstore");
+        //    "48ea4334-f908-439d-9155-a26801228547.mysql.sequelizer.com",
+        //    "lomrjnnynsbwqkca",
+        //    "GQLGjgixD8aMome4GwRTxxXCbbBPccZw4PzqfKcuyekvE2RuMguqNtLi2hEhLBuA",
+        //    "db48ea4334f908439d9155a26801228547");
+        private MySQLDBDriver mySQLDBDriver = new MySQLDBDriver(
+            "localhost",
+            "root",
+            "root",
+            "productstore");
 
         public ProductRepository()
         {
